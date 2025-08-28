@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
+    //check ${rabbitmq.queue.credit-decisions}
     @Bean
     public Queue CreditDecisionQueue(@Value("${rabbitmq.queue.credit-decisions}") String queueName) {
         return new Queue(queueName, true);

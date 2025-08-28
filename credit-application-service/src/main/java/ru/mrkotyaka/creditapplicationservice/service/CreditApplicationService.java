@@ -1,7 +1,7 @@
 package ru.mrkotyaka.creditapplicationservice.service;
 
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor; //поправить
+import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,8 +39,8 @@ public class CreditApplicationService {
                 creditApplication.getTerm(),
                 creditApplication.getIncome(),
                 creditApplication.getCurrentCreditLoad(),
-                creditApplication.getCreditRating()
-//                creditApplication.getStatus() //попробовать убрать
+                creditApplication.getCreditRating(),
+                creditApplication.getStatus() //попробовать убрать
         );
 
         kafkaTemplate.send(topic, event);

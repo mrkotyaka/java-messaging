@@ -15,5 +15,5 @@ public class CreditApplicationRequest {
     private BigDecimal income;
     private BigDecimal currentCreditLoad;
     private Integer creditRating;
-//    private ApplicationStatus status;
+    private ApplicationStatus status;
 }

@@ -15,7 +15,7 @@ Content-Type: application/json
 GET http://localhost:8080/api/credit-applications/1/status
 
 ### GET specific application status
-GET http://localhost:8080/api/credit-applications/3/status
+GET http://localhost:8080/api/credit-applications/2/status
 
 ### GET specific application status
 GET http://localhost:8080/api/credit-applications/v2/1/status
