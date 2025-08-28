@@ -1,0 +1,21 @@
+
+### Create credit application
+POST http://localhost:8080/api/credit-applications
+Content-Type: application/json
+
+{
+  "amount": 10000,
+  "term": 12,
+  "income": 50000,
+  "currentCreditLoad": 10000,
+  "creditRating": 750
+}
+
+### GET specific application status
+GET http://localhost:8080/api/credit-applications/1/status
+
+### GET specific application status
+GET http://localhost:8080/api/credit-applications/3/status
+
+### GET specific application status
+GET http://localhost:8080/api/credit-applications/v2/1/status

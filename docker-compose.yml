@@ -1,0 +1,81 @@
+services:
+  postgresql:
+    image: postgres:15
+    container_name: postgresql
+    environment:
+      POSTGRES_DB: application_db
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      - ZOOKEEPER_CLIENT_PORT=2181
+      - ZOOKEEPER_TICK_TIME=2000
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.1
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    ports:
+      - "9092:9092"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+#  credit-application-service:
+#    build: ./credit-application-service
+#    container_name: credit-app-service
+#    depends_on:
+#      - kafka
+#      - rabbitmq
+#      - postgresql
+#    environment:
+#      SPRING_PROFILES_ACTIVE: docker
+#    ports:
+#      - "8080:8080"
+#
+#  credit-processing-service:
+#    build: ./credit-processing-service
+#    container_name: credit-processing-service
+#    depends_on:
+#      - kafka
+#      - zookeeper
+#      - rabbitmq
+#    environment:
+#      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+#      SPRING_PROFILES_ACTIVE: docker
+#    ports:
+#      - "8090:8090"
+volumes:
+  postgres_data:
+  kafka-data:
+  rabbitmq-data:
