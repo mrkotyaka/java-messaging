@@ -62,7 +62,7 @@ services:
 #      SPRING_PROFILES_ACTIVE: docker
 #    ports:
 #      - "8080:8080"
-#
+
 #  credit-processing-service:
 #    build: ./credit-processing-service
 #    container_name: credit-processing-service
