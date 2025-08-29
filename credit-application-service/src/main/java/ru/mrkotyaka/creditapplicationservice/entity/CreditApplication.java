@@ -8,7 +8,6 @@ import lombok.Setter;
 import ru.mrkotyaka.creditapplicationservice.model.ApplicationStatus;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -32,8 +31,5 @@ public class CreditApplication {
     private Integer creditRating;
 
     @Enumerated(EnumType.STRING)
-//    @Column(nullable = false)
     private ApplicationStatus status = ApplicationStatus.PROCESSING;
-
-//    private LocalDateTime createdAt;
 }

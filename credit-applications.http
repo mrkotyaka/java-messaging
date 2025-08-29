@@ -4,9 +4,9 @@ POST http://localhost:8080/api/credit-applications
 Content-Type: application/json
 
 {
-  "amount": 10000000,
+  "amount": 10000,
   "term": 12,
-  "income": 50000,
+  "income": 100000,
   "currentCreditLoad": 10000,
   "creditRating": 750
 }
@@ -14,8 +14,5 @@ Content-Type: application/json
 ### GET specific application status
 GET http://localhost:8080/api/credit-applications/1/status
 
-### GET specific application status
-GET http://localhost:8080/api/credit-applications/2/status
-
-### GET specific application status
-GET http://localhost:8080/api/credit-applications/v2/1/status
+### GET all application status
+GET http://localhost:8080/api/credit-applications

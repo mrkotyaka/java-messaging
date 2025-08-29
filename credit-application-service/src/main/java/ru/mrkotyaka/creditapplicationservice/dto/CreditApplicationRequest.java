@@ -1,7 +1,6 @@
 package ru.mrkotyaka.creditapplicationservice.dto;
 
 import lombok.*;
-import ru.mrkotyaka.creditapplicationservice.model.ApplicationStatus;
 
 import java.math.BigDecimal;
 
@@ -15,5 +14,4 @@ public class CreditApplicationRequest {
     private BigDecimal income;
     private BigDecimal currentCreditLoad;
     private Integer creditRating;
-//    private ApplicationStatus status;
 }

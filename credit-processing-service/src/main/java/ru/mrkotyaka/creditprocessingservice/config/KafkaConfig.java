@@ -32,15 +32,6 @@ public class KafkaConfig {
         config.put(JsonDeserializer.VALUE_DEFAULT_TYPE, "ru.mrkotyaka.creditprocessingservice.event.CreditApplicationEvent");
         return new DefaultKafkaConsumerFactory<>(config);
     }
-//    @Bean
-//    public ConsumerFactory<String, CreditApplicationEvent> consumerFactory(@Value("${spring.kafka.bootstrap-servers}") String bootstrapServers) {
-//        Map<String, Object> config = new HashMap<>();
-//        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-//        config.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-//        return new DefaultKafkaConsumerFactory<>(config,
-//                new StringDeserializer(), new JsonDeserializer<>(CreditApplicationEvent.class, false));
-//    }
-
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, CreditApplicationEvent> kafkaListenerContainerFactory() {
@@ -48,10 +39,4 @@ public class KafkaConfig {
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
-//    @Bean
-//    public ConcurrentKafkaListenerContainerFactory<String, CreditApplicationEvent> kafkaListenerContainerFactory(ConsumerFactory<String, CreditApplicationEvent> cf) {
-//        ConcurrentKafkaListenerContainerFactory<String, CreditApplicationEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
-//        factory.setConsumerFactory(cf);
-//        return factory;
-//    }
 }
