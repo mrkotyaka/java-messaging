@@ -4,7 +4,7 @@ POST http://localhost:8080/api/credit-applications
 Content-Type: application/json
 
 {
-  "amount": 10000,
+  "amount": 10000000,
   "term": 12,
   "income": 50000,
   "currentCreditLoad": 10000,
