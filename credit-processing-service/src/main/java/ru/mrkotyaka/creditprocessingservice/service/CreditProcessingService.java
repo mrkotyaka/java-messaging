@@ -24,19 +24,10 @@ public class CreditProcessingService {
         BigDecimal totalMonthlyPayments = monthlyPayment.add(event.getCurrentCreditLoad());
         boolean approved = totalMonthlyPayments.compareTo(event.getIncome().multiply(BigDecimal.valueOf(0.5))) <= 0;
 
-        CreditDecisionEvent decision = new CreditDecisionEvent(event.getApplicationId(), approved ? "APPROVED" : "REJECTED", approved);
-
-//        decision.setApplicationId(event.getApplicationId());
-//        decision.setDecision(approved ? "APPROVED" : "REJECTED");
-
-//        creditApplicationRepository.findById(event.getApplicationId())
-//                .ifPresent(creditApplication -> {
-//                    creditApplication.setStatus(event.isApproved() ?
-//                            ApplicationStatus.APPROVED : ApplicationStatus.REJECTED);
-//                    creditApplicationRepository.save(creditApplication);
-//                });
+        CreditDecisionEvent decision = new CreditDecisionEvent(event.getApplicationId(), approved);
 
         rabbitTemplate.convertAndSend(decisionQueue, decision);
+        System.out.println("be here?");
     }
 
     private BigDecimal calculateMonthlyPayment(BigDecimal amount, Integer term) {

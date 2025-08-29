@@ -39,8 +39,8 @@ public class CreditApplicationService {
                 creditApplication.getTerm(),
                 creditApplication.getIncome(),
                 creditApplication.getCurrentCreditLoad(),
-                creditApplication.getCreditRating(),
-                creditApplication.getStatus() //попробовать убрать
+                creditApplication.getCreditRating()
+//                creditApplication.getStatus() //попробовать убрать
         );
 
         kafkaTemplate.send(topic, event);
@@ -65,6 +65,9 @@ public class CreditApplicationService {
                 .ifPresent(creditApplication -> {
                     creditApplication.setStatus(event.isApproved() ?
                             ApplicationStatus.APPROVED : ApplicationStatus.REJECTED);
+
+                    System.out.println("status: " + event.isApproved());
+
                     creditApplicationRepository.save(creditApplication);
                 });
     }

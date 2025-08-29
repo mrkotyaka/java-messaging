@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CreditDecisionEvent {
     private Long applicationId;
-    private String decision;
+//    private String decision;
     private boolean approved;
 }
