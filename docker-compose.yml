@@ -51,6 +51,12 @@ services:
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
 
+  zoonavigator:
+    container_name: zoonavigator
+    image: elkozmon/zoonavigator
+    ports:
+      - 9000:9000
+
 #  credit-application-service:
 #    build: ./credit-application-service
 #    container_name: credit-app-service
