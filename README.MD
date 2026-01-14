@@ -1,38 +1,38 @@
-# Задание
+# Task
 
-## Инструменты и материалы, которые пригодятся для выполнения задания
-### Инструменты:
-- IntellijIDEA 
-- Kafka 
-- RabbitMQ 
-- RDBMS на выбор 
-- Docker 
-- http-клиент
+## Tools and materials that will be useful for completing the task
+### Tools:
+- IntellijIDEA
+- Kafka
+- RabbitMQ
+- RDBMS of your choice
+- Docker
+- HTTP client
 
-### Материалы:
+### Materials:
 - https://www.baeldung.com/rabbitmq
 - https://www.baeldung.com/spring-kafka
 
-## Описание задания
-Необходимо создать два микросервиса, которые будут обмениваться между собой данными с помощью брокеров сообщений: RabbitMQ и Kafka. Например, первый сервис отправляет сообщение во второй сервис с помощью Kafka, а второй сервис отправляет ответ на это сообщение в первый сервис с помощью RabbitMQ. В качестве триггера для отправки сообщения будет использоваться REST-запрос в контроллер. Для развёртывания Kafka и RabbitMQ необходимо использовать Docker и docker-compose.
+## Task description
+You need to create two microservices that will exchange data with each other using message brokers: RabbitMQ and Kafka. For example, the first service sends a message to the second service using Kafka, and the second service sends a response to this message to the first service using RabbitMQ. A REST request to the controller will be used as a trigger for sending a message. To deploy Kafka and RabbitMQ, you must use Docker and docker-compose.
 
-### Инструкция к выполнению
+### Instructions
 
-1. Создать микросервис – API для оформления заявки на кредит. Заявка на кредит должна содержать сумму кредита, срок кредита, доход пользователя, его текущую кредитную нагрузку и его текущий кредитный рейтинг
-- Использовать RestController для получения и обработки запроса из spring-boot-starter-web 
-- При получении заявки на кредит сервис должен сохранять эту заявку в БД, отправлять её в сервис обработки заявок с помощью Kafka и возвращать пользователю ID заявки в базе 
-- Дополнительно в базе необходимо создать поле, в котором храним статус заявки (в обработке/одобрено/отказано). При добавлении заявки в базу значение статуса по умолчению будет “в обработке” 
-- Добавить второе api для получения статуса заявки по id заявки 
-- Получать ответ от сервиса обработки заявки с помощью RabbitMQ 
-- При обработке ответа от сервиса обработки заявки необходимо обновлять её статус в БД 
-- Предусмотреть механизм миграций для разворачивания проекта 
-- Для взаимодействия нужно использовать отдельные классы (обычно имеют суффикс Event в названии). DTO, полученное от пользователя, пересылать другому сервису не нужно
+1. Create a microservice – an API for submitting a loan application. The loan application must contain the loan amount, loan term, user income, current credit load, and current credit rating.
+- Use RestController to receive and process requests from spring-boot-starter-web
+- When receiving a loan application, the service must save this application in the database, send it to the application processing service using Kafka, and return the application ID in the database to the user 
+- Additionally, a field must be created in the database to store the application status (in progress/approved/declined). When adding an application to the database, the default status value will be “in progress.”
+- Add a second API to obtain the application status by application ID.
+- Receive a response from the application processing service using RabbitMQ. 
+- When processing the response from the application processing service, update its status in the database.
+- Provide a migration mechanism for project deployment.
+- Use separate classes for interaction (usually with the suffix Event in the name). There is no need to forward the DTO received from the user to another service.
 
-2. Создать микросервис, обрабатывающий заявку на кредит 
-- Микросервис должен получать заявку на кредит с помощью Kafka 
-- Принимать решение, одобрить кредит или нет (платёж по кредитам не должен превышать 50% от доходов)
-- Отправлять в ответ информацию о принятом решении с помощью RabbitMQ
+2. Create a microservice that processes loan applications
+- The microservice should receive loan applications using Kafka
+- Make a decision whether to approve the loan or not (loan payments should not exceed 50% of income)
+- Send information about the decision made using RabbitMQ
 
-3. Добавить файл docker-compose для развёртывания приложения
+3. Add a docker-compose file to deploy the application
 
-4. Добавить файл http, содержащий запросы для заявки на кредит и получения статуса заявки на кредит
+4. Add an http file containing requests for a loan application and obtaining the status of a loan application
